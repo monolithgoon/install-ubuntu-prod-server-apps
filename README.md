@@ -1,4 +1,4 @@
-# Ubutu Server Package Installation Automation Script
+# Ubutnu 22.0+ Server Package Installation Automation Script
 
 ## _Overview_
 This script automates the installation of various tools and packages for a fresh Ubuntu production server using Bash. 
