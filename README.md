@@ -10,8 +10,11 @@ The script is intended to be executed using the Bash interpreter. The shebang at
 ## _Supported Ubuntu Version_
 This script works flawlessly on this version of Ubuntu
 ```bash
-Ubuntu 22.04 (Jammy)
-Ubuntu 20.04+ (x64 and ARM64)
+Distributor ID: Ubuntu
+Description:    Ubuntu 22.04.3 LTS
+Architecture:   x64 and ARM64
+Release:        22.04
+Codename:       jammy
 ```
 
 ## _Installed Tools and Packages_
