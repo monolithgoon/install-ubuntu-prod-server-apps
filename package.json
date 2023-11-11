@@ -1,0 +1,31 @@
+{
+  "name": "install-ubuntu-prod-server-apps",
+  "version": "1.0.0",
+  "description": "Shell script to automate the installation of critical applications on Ubuntu 21^ server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monolithgoon/install-ubuntu-prod-server-apps.git"
+  },
+  "keywords": [
+    "linux",
+    "ubuntu",
+    "server",
+    "mongodb",
+    "github-shell",
+    "pm2",
+    "mongodb-shell",
+    "npm",
+    "nvm",
+    "nginx"
+  ],
+  "author": "Nduka Okpue",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/monolithgoon/install-ubuntu-prod-server-apps/issues"
+  },
+  "homepage": "https://github.com/monolithgoon/install-ubuntu-prod-server-apps#readme"
+}
