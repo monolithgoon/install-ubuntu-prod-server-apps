@@ -7,6 +7,13 @@ The script is organized into sections, each responsible for installing and confi
 
 The script is intended to be executed using the Bash interpreter. The shebang at the beginning (`#!/usr/bin/env bash`) ensures that the script is interpreted using Bash.
 
+## _Supported Ubuntu Version_
+This script works flawlessly on this version of Ubuntu
+```bash
+Ubuntu 22.04 (Jammy)
+Ubuntu 20.04+ (x64 and ARM64)
+```
+
 ## _Installed Tools and Packages_
 
 The following tools and packages will be installed by the provided script:
