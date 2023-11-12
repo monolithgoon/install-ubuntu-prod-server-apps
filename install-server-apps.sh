@@ -35,6 +35,9 @@ box_text() {
     echo "└────────────────────────────────────────┘"
 }
 
+box_text "SETUP `production.env` ENVIRONMENT VARIABLES FILE"
+set -o allexport; source /home/ubuntu/production.env; set +o allexport
+
 box_text "GITHUB SHELL" 
 
 # Script to install GitHub CLI (gh) on Ubuntu
@@ -169,3 +172,17 @@ mongosh --version
 node -v
 npm -v
 sudo ufw status verbose
+
+
+box_text "REBOOT SERVER"
+
+read -p "Do you want to reboot server? (Y | N): " answer
+
+if [ "$answer" == "y" ]; then
+    echo "Rebooting..."
+    sudo reboot
+elif [ "$answer" == "n" ]; then
+    echo "Reboot canceled."
+else
+    echo "Invalid response. Please enter 'yes' or 'no'."
+fi
