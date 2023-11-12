@@ -129,24 +129,32 @@ sudo npm install -g pm2
 sudo pm2 startup systemd
 
 
-box_text "NGINX"
+# box_text "NGINX"
 
 # Install nginx
 
-sudo apt-get install -y nginx
+# sudo apt-get install -y nginx
 
 # To start nginx, run
 
 # sudo systemctl start nginx
 
 
+box_text "htop"
+sudo apt-get install htop
+
+
 box_text "UFW (FIREWALL)"
 
 # allow ssh connections through firewall
-sudo ufw allow OpenSSH
+# sudo ufw allow OpenSSH
+
+#Allow HTTP and HTTPS Directly
+sudo ufw allow 80
+sudo ufw allow 443
 
 # allow http & https through firewall
-sudo ufw allow 'Nginx Full'
+# sudo ufw allow 'Nginx Full'
 
 # enable firewall
 sudo ufw --force enable
@@ -160,4 +168,4 @@ mongod --version
 mongosh --version
 node -v
 npm -v
-sudo ufw status
+sudo ufw status verbose
