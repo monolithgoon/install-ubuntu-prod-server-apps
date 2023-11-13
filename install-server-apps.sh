@@ -97,7 +97,8 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb
 
 # Reload the local package database
 
-sudo apt-get update
+# REMOVE -> ALREADY UPDATED + SEEMS TO BE CAUSING PROBLEMS
+# sudo apt-get update
 
 # Install the `mongosh` package
 
@@ -118,7 +119,8 @@ box_text "MONGODB"
 
 # 1. Reload local package database
 
-sudo apt-get update
+# REMOVE -> ALREADY UPDATED + SEEMS TO BE CAUSING PROBLEMS
+# sudo apt-get update
 
 # 2. Install the latest version of mongodb
 
