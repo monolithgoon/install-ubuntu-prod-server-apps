@@ -35,7 +35,7 @@ box_text() {
     echo "└────────────────────────────────────────┘"
 }
 
-box_text "SETUP `production.env` ENVIRONMENT VARIABLES FILE"
+box_text "SETUP `~/.profile` FOR ENV VAR "
 
 # Define the code to be added
 code_to_add="set -o allexport; source /home/ubuntu/production.env; set +o allexport"
