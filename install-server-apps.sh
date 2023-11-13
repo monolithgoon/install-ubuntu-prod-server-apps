@@ -38,14 +38,14 @@ box_text() {
 box_text "SETUP `~/.profile` FOR ENV VAR "
 
 # Define the code to be added
-code_to_add="set -o allexport; source /home/ubuntu/production.env; set +o allexport"
+code_to_append="set -o allexport; source /home/ubuntu/production.env; set +o allexport"
 
 # Check if the code is already in the file
-if grep -qF "$code_to_add" ~/.profile; then
+if grep -qF "$code_to_append" ~/.profile; then
     echo "Code already present in ~/.profile. No changes made."
 else
     # Append the code to the end of the file
-    echo "$code_to_add" >> ~/.profile
+    echo "$code_to_append" >> ~/.profile
     echo "Code added to ~/.profile."
 fi
 
