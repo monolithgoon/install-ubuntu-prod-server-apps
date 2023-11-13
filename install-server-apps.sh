@@ -36,7 +36,19 @@ box_text() {
 }
 
 box_text "SETUP `production.env` ENVIRONMENT VARIABLES FILE"
-set -o allexport; source /home/ubuntu/production.env; set +o allexport
+
+# Define the code to be added
+code_to_add="set -o allexport; source /home/ubuntu/production.env; set +o allexport"
+
+# Check if the code is already in the file
+if grep -qF "$code_to_add" ~/.profile; then
+    echo "Code already present in ~/.profile. No changes made."
+else
+    # Append the code to the end of the file
+    echo "$code_to_add" >> ~/.profile
+    echo "Code added to ~/.profile."
+fi
+
 
 box_text "GITHUB SHELL" 
 
