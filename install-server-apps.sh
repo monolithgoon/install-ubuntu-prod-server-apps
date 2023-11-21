@@ -1,20 +1,6 @@
 # This script is written in Bash and will be executed using the Bash interpreter.
 #!/usr/bin/env bash
 
-# box_text() {
-#     local text="$1"
-#     local length=${#text}
-#     local width=40  # Adjust this value based on your desired width
-
-#     # Calculate padding for centering
-#     local padding=$(( (width - length) / 2 ))
-
-#     # Draw the box
-#     echo "┌────────────────────────────────────────┐"
-#     printf "│%*s%s%*s│\n" "$padding" "" "$text" "$padding" ""
-#     echo "└────────────────────────────────────────┘"
-# }
-
 box_text() {
     local text="$1"
     local length=${#text}
@@ -35,7 +21,38 @@ box_text() {
     echo "└────────────────────────────────────────┘"
 }
 
-box_text "SETUP `~/.profile` FOR ENV VAR "
+reboot_server() {
+    read -p "Do you want to reboot server? (Y/N): " answer
+    if [ "$answer" == "Y" ] || [ "$answer" == "y" ]; then
+        echo "Rebooting..."
+        sudo reboot
+    elif [ "$answer" == "N" ] || [ "$answer" == "n" ]; then
+        echo "Reboot canceled."
+    else
+        echo "Invalid response. Please enter 'yes' or 'no'."
+    fi
+}
+
+# Function to label and execute a command
+label_and_execute() {
+    local label="$1"
+    local command="$2"
+
+    # Array of ANSI color codes
+    local colors=("\e[1;31m" "\e[1;32m" "\e[1;33m" "\e[1;34m" "\e[1;35m" "\e[1;36m")
+
+    # Select a random color from the array
+    local random_color=${colors[$((RANDOM % ${#colors[@]}))]}
+
+    # echo -e "\n${random_color}--- $label ---\e[0m"
+    echo -e "\n${random_color}$label\e[0m"
+    eval "$command"
+}
+
+
+
+
+box_text "SETUP .profile FOR ENV VAR    "
 
 # Define the code to be added
 code_to_append="set -o allexport; source /home/ubuntu/production.env; set +o allexport"
@@ -50,17 +67,37 @@ else
 fi
 
 
-box_text "GITHUB SHELL" 
+
+
+box_text "UPDATE PACKAGE LIST   "
+
+sudo apt-get update
+
+
+
+
+
+box_text "UPGRADE PACKAGES  "
+
+sudo apt-get upgrade
+
+
+
+
+box_text "GITHUB SHELL  " 
 
 # Script to install GitHub CLI (gh) on Ubuntu
 
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-sudo apt update
-sudo apt install gh
+# REMOVE -> ALREADY CALLED ABOVE
+# sudo apt update
+# sudo apt install gh
 
 
-box_text "Node Version Manager (NVM) & NPM"
+
+
+box_text "Node Version Manager (NVM) & NPM  "
 
 # Install Node Version Manager (NVM)
 
@@ -83,7 +120,9 @@ nvm --version
 nvm install node
 
 
-box_text "MONGODB SHELL"
+
+
+box_text "MONGODB SHELL "
 
 # Import the public key used by the package management system
 # The command writes the GPG key to your system's /etc/apt/trusted.gpg.d folder and prints the key to your terminal. You do not need to copy or save the key that is printed to the terminal.
@@ -97,8 +136,7 @@ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb
 
 # Reload the local package database
 
-# REMOVE -> ALREADY UPDATED + SEEMS TO BE CAUSING PROBLEMS
-# sudo apt-get update
+sudo apt-get update
 
 # Install the `mongosh` package
 
@@ -109,18 +147,20 @@ sudo apt-get install -y mongodb-mongosh
 mongosh --version
 
 
-box_text "MONGODB" 
 
-# import mongodb 4.0 public gpg key
-# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 
-# create the /etc/apt/sources.list.d/mongodb-org-4.0.list file for mongodb
-# echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+box_text "MONGODB   " 
+
+import mongodb 4.0 public gpg key
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+
+create the /etc/apt/sources.list.d/mongodb-org-4.0.list file for mongodb
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 
 # 1. Reload local package database
 
-# REMOVE -> ALREADY UPDATED + SEEMS TO BE CAUSING PROBLEMS
-# sudo apt-get update
+REMOVE -> ALREADY UPDATED + SEEMS TO BE CAUSING PROBLEMS
+sudo apt-get update
 
 # 2. Install the latest version of mongodb
 
@@ -135,7 +175,9 @@ sudo systemctl start mongod
 sudo systemctl enable mongod
 
 
-box_text "PM2"
+
+
+box_text "PM2   "
 
 # 1. Install pm2 with npm
 
@@ -146,22 +188,28 @@ sudo npm install -g pm2
 sudo pm2 startup systemd
 
 
-# box_text "NGINX"
 
-# Install nginx
+
+box_text "NGINX "
+
+# # Install nginx
 
 # sudo apt-get install -y nginx
 
-# To start nginx, run
+# # To start nginx, run
 
 # sudo systemctl start nginx
 
 
-box_text "htop"
+
+
+box_text "htop  "
 sudo apt-get install htop
 
 
-box_text "UFW (FIREWALL)"
+
+
+box_text "UFW (FIREWALL)    "
 
 # allow ssh connections through firewall
 # sudo ufw allow OpenSSH
@@ -177,26 +225,22 @@ sudo ufw allow 443
 sudo ufw --force enable
 
 
-box_text "INSTALLED APPLICATIONS & UFW STATE"
-
-nginx -v
-gh --version
-mongod --version
-mongosh --version
-node -v
-npm -v
-sudo ufw status verbose
 
 
-box_text "REBOOT SERVER"
+box_text "INSTALLED APPLICATIONS & UFW STATE    "
 
-read -p "Do you want to reboot server? (Y | N): " answer
+# Execute commands with labels
+# label_and_execute "NGINX Version" "nginx -v"
+label_and_execute "GitHub CLI Version" "gh --version"
+label_and_execute "MongoDB Server Version" "mongod --version"
+label_and_execute "MongoDB Shell Version" "mongosh --version"
+label_and_execute "Node.js Version" "node -v"
+label_and_execute "npm Version" "npm -v"
+label_and_execute "PM2 Version" "pm2 --version"
+label_and_execute "UFW Status" "sudo ufw status verbose"
 
-if [ "$answer" == "y" ]; then
-    echo "Rebooting..."
-    sudo reboot
-elif [ "$answer" == "n" ]; then
-    echo "Reboot canceled."
-else
-    echo "Invalid response. Please enter 'yes' or 'no'."
-fi
+
+
+box_text "REBOOT SERVER "
+
+reboot_server
