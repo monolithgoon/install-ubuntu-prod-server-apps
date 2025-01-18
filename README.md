@@ -26,15 +26,24 @@ Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly 
 - Always check the official documentation for each tool for the most up-to-date information.
 ```
 
-### _Setting Up Environment Variables_
-Before installing any packages, the script configures environment variables for production by updating the `.profile` file:
-1. **Environment Setup**: Adds the following line to the `.profile` file to export environment variables:
-   ```bash
-   set -o allexport; source /home/ubuntu/production.env; set +o allexport
-
 ### _Prerequisites_
 - Administrative privileges (`sudo` access).
 - Internet connectivity to download and install packages.
+
+### _Setting Up Environment Variables_
+Before installing any packages, the script configures environment variables for production by updating the `.profile` file:
+
+- Adds the following line to the `.profile` file to export environment variables:
+   
+   ```bash
+   set -o allexport; source /home/ubuntu/production.env; set +o allexport
+   ```
+   - All variables defined or modified in the current shell session after   `set -o allexport` is enabled will be automatically exported to the environment, making them available to child processes. For example:
+      ```bash
+      set -o allexport
+         MY_VAR="value"  # Automatically exported
+      ```
+   - `set +o allexport` disables the automatic exporting of variables in the current shell session. After this command, any variables you define or modify will no longer be automatically added to the environment.
 
 ## _Installed Tools and Packages_
 
