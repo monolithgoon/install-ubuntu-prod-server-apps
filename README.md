@@ -18,7 +18,9 @@ Codename:       jammy
 Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly tested.
 
 ## _Additional Notes_
+
 ```bash
+- Administrative privileges (`sudo` access) required.
 - Ensure that the script is tested in a staging environment before deploying it to production.
 - The script installs the latest versions of the tools and packages available at the time of execution by using official repositories or package managers.
 - Ensure logging mechanisms are implemented in the script to capture installation steps and errors.
@@ -26,26 +28,37 @@ Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly 
 - Always check the official documentation for each tool for the most up-to-date information.
 ```
 
-### _Prerequisites_
-- Administrative privileges (`sudo` access).
-- Internet connectivity to download and install packages.
+## _Setting Up Environment Variables_
 
-### _Setting Up Environment Variables_
-Before installing any packages, the script configures environment variables for production by updating the `.profile` file:
+Before installing any packages, the script configures environment variables for production by adding the following line to the `.profile` file:
 
-- Adds the following line to the `.profile` file to export environment variables:
-   
-   ```bash
-   set -o allexport; source /home/ubuntu/production.env; set +o allexport
-   ```
-   - All variables defined or modified in the current shell session after   `set -o allexport` is enabled will be automatically exported to the environment, making them available to child processes. For example:
-      ```bash
-      set -o allexport
-         MY_VAR="value"  # Automatically exported
-      ```
-   - `set +o allexport` disables the automatic exporting of variables in the current shell session. After this command, any variables you define or modify will no longer be automatically added to the environment.
+```bash
+set -o allexport; source /home/ubuntu/production.env; set +o allexport
+```
 
-## _Installed Tools and Packages_
+- **_Automatic Exporting_**
+   - `set -o allexport` enables automatic exporting of all variables defined or modified in the current shell session. For example:
+
+     ```bash
+     set -o allexport
+     MY_VAR="value"  # Automatically exported
+     ```
+   - This makes the variables available to child processes without explicitly using the `export` command.
+
+- **_Loading Environment Variables_**
+   - `source /home/ubuntu/production.env` loads the environment variables defined in the `production.env` file into the current shell session. These variables are then exported automatically because of `set -o allexport`.
+
+- **_Disabling Automatic Exporting_**
+   - `set +o allexport` disables automatic exporting of variables. Any variables defined or modified after this point will not be added to the environment automatically.
+
+This setup ensures that every time a user logs in or starts a new shell session:
+1. `set -o allexport`: The environment variables defined in the `production.env` file are automatically exported ).
+2. These variables are immediately available for use by the shell or any child processes.
+3. `set +o allexport`: Automatic exporting is disabled after loading the environment variables, preventing unintentional exports of future variables.
+
+
+
+## _Installed Tools & Packages_
 
 The following tools and packages will be installed by the provided script:
 
