@@ -1,14 +1,13 @@
-# Ubutnu 22.0+ Server Package Installation Automation Script
+# Ubuntu 22.0+ Server Setup Provisioning Script - Automated Package Installer
 
 ## _Overview_
-This script automates the installation of various tools and packages for a fresh Ubuntu production server using Bash. 
+This script automates the installation of various tools and packages for a fresh Ubuntu production server using Bash.
 
-The script is organized into sections, each responsible for installing and configuring a specific application.
-
-The script is intended to be executed using the Bash interpreter. The shebang at the beginning (`#!/usr/bin/env bash`) ensures that the script is interpreted using Bash.
+The script is organized into sections, each responsible for installing and configuring a specific application. It is intended to be executed using the Bash interpreter. The shebang at the beginning (`#!/usr/bin/env bash`) ensures that the script is interpreted using Bash.
 
 ## _Supported Ubuntu Version_
-This script works flawlessly on this version of Ubuntu
+This script works flawlessly on the following version of Ubuntu:
+
 ```bash
 Distributor ID: Ubuntu
 Description:    Ubuntu 22.04.3 LTS
@@ -17,31 +16,44 @@ Release:        22.04
 Codename:       jammy
 ```
 
+Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly tested.
+
+## _Prerequisites_
+- Administrative privileges (`sudo` access).
+- Internet connectivity to download and install packages.
+
+Ensure that the script is tested in a staging environment before deploying it to production.
+
 ## _Installed Tools and Packages_
 
 The following tools and packages will be installed by the provided script:
 
 ### _1. GitHub CLI (gh)_
-- GitHub CLI (gh)
+- GitHub CLI (gh) – A command-line tool for interacting with GitHub repositories.
 
 ### _2. Node Version Manager (NVM) & NPM_
-- Node Version Manager (NVM)
-- Node.js
-- npm (Node Package Manager)
+- Node Version Manager (NVM) – Used to manage multiple versions of Node.js.
+- Node.js – JavaScript runtime.
+- npm (Node Package Manager) – Package manager for Node.js.
 
 ### _3. MongoDB Shell_
-- MongoDB Shell (mongosh)
+- MongoDB Shell (mongosh) – Interactive shell for MongoDB.
 
 ### _4. MongoDB_
-- MongoDB Server
+- MongoDB Server – NoSQL database.
 
 ### _5. PM2_
-- PM2 (Process Manager for Node.js applications)
+- PM2 – Process Manager for Node.js applications.
 
 ### _6. Nginx_
-- Nginx (Web server)
+- Nginx – Web server for serving HTTP content.
 
 ### _7. UFW (Uncomplicated Firewall)_
-- UFW (Firewall)
+- UFW – Firewall management tool.
 
-Please note that the actual versions of these tools and packages will depend on the latest versions available at the time of installation. Always check the official documentation for each tool for the most up-to-date information.
+## _Additional Notes_
+- The script installs the latest versions of the tools and packages available at the time of execution by using official repositories or package managers.
+- Ensure logging mechanisms are implemented in the script to capture installation steps and errors.
+- If an installation step fails, users may need to troubleshoot or manually complete the installation process.
+
+Always check the official documentation for each tool for the most up-to-date information.
