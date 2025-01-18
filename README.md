@@ -5,6 +5,20 @@ This script automates the installation of various tools and packages for a fresh
 
 The script is organized into sections, each responsible for installing and configuring a specific application. It is intended to be executed using the Bash interpreter. The shebang at the beginning (`#!/usr/bin/env bash`) ensures that the script is interpreted using Bash.
 
+## _Installed Tools & Packages_
+
+The following tools and packages will be installed by the provided script:
+
+```bash
+   1. GitHub CLI (gh): Command-line tool for interacting with GitHub repositories.
+   2. NVM: Manages Node.js versions; Node.js: JavaScript runtime; npm: Package manager for Node.js.
+   3. MongoDB Shell (mongosh): Interactive shell for MongoDB.
+   4. MongoDB Server: NoSQL database.
+   5. PM2: Process manager for Node.js applications.
+   6. Nginx: Web server for HTTP content.
+   7. UFW: Firewall management tool.
+```
+
 ## _Supported Ubuntu Version_
 This script works flawlessly on the following version of Ubuntu:
 
@@ -55,19 +69,3 @@ This setup ensures that every time a user logs in or starts a new shell session:
 1. `set -o allexport`: The environment variables defined in the `production.env` file are automatically exported ).
 2. These variables are immediately available for use by the shell or any child processes.
 3. `set +o allexport`: Automatic exporting is disabled after loading the environment variables, preventing unintentional exports of future variables.
-
-
-
-## _Installed Tools & Packages_
-
-The following tools and packages will be installed by the provided script:
-
-```bash
-   1. GitHub CLI (gh): Command-line tool for interacting with GitHub repositories.
-   2. NVM: Manages Node.js versions; Node.js: JavaScript runtime; npm: Package manager for Node.js.
-   3. MongoDB Shell (mongosh): Interactive shell for MongoDB.
-   4. MongoDB Server: NoSQL database.
-   5. PM2: Process manager for Node.js applications.
-   6. Nginx: Web server for HTTP content.
-   7. UFW: Firewall management tool.
-```
