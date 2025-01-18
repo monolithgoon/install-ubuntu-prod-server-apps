@@ -62,25 +62,12 @@ This setup ensures that every time a user logs in or starts a new shell session:
 
 The following tools and packages will be installed by the provided script:
 
-### _1. GitHub CLI (gh)_
-- GitHub CLI (gh) – Command-line tool for interacting with GitHub repositories.
-
-### _2. Node Version Manager (NVM) & NPM_
-- Node Version Manager (NVM) – Used to manage multiple versions of Node.js.
-- Node.js – JavaScript runtime.
-- npm (Node Package Manager) – Package manager for Node.js.
-
-### _3. MongoDB Shell_
-- MongoDB Shell (mongosh) – Interactive shell for MongoDB.
-
-### _4. MongoDB_
-- MongoDB Server – NoSQL database.
-
-### _5. PM2_
-- PM2 – Process Manager for Node.js applications.
-
-### _6. Nginx_
-- Nginx – Web server for serving HTTP content.
-
-### _7. UFW (Uncomplicated Firewall)_
-- UFW – Firewall management tool.
+```bash
+   1. GitHub CLI (gh): Command-line tool for interacting with GitHub repositories.
+   2. NVM: Manages Node.js versions; Node.js: JavaScript runtime; npm: Package manager for Node.js.
+   3. MongoDB Shell (mongosh): Interactive shell for MongoDB.
+   4. MongoDB Server: NoSQL database.
+   5. PM2: Process manager for Node.js applications.
+   6. Nginx: Web server for HTTP content.
+   7. UFW: Firewall management tool.
+```
