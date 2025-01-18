@@ -15,21 +15,33 @@ Architecture:   x64 and ARM64
 Release:        22.04
 Codename:       jammy
 ```
-
 Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly tested.
 
-## _Prerequisites_
+## _Additional Notes_
+```bash
+- Ensure that the script is tested in a staging environment before deploying it to production.
+- The script installs the latest versions of the tools and packages available at the time of execution by using official repositories or package managers.
+- Ensure logging mechanisms are implemented in the script to capture installation steps and errors.
+- If an installation step fails, users may need to troubleshoot or manually complete the installation process.
+- Always check the official documentation for each tool for the most up-to-date information.
+```
+
+### _Setting Up Environment Variables_
+Before installing any packages, the script configures environment variables for production by updating the `.profile` file:
+1. **Environment Setup**: Adds the following line to the `.profile` file to export environment variables:
+   ```bash
+   set -o allexport; source /home/ubuntu/production.env; set +o allexport
+
+### _Prerequisites_
 - Administrative privileges (`sudo` access).
 - Internet connectivity to download and install packages.
-
-Ensure that the script is tested in a staging environment before deploying it to production.
 
 ## _Installed Tools and Packages_
 
 The following tools and packages will be installed by the provided script:
 
 ### _1. GitHub CLI (gh)_
-- GitHub CLI (gh) – A command-line tool for interacting with GitHub repositories.
+- GitHub CLI (gh) – Command-line tool for interacting with GitHub repositories.
 
 ### _2. Node Version Manager (NVM) & NPM_
 - Node Version Manager (NVM) – Used to manage multiple versions of Node.js.
@@ -50,10 +62,3 @@ The following tools and packages will be installed by the provided script:
 
 ### _7. UFW (Uncomplicated Firewall)_
 - UFW – Firewall management tool.
-
-## _Additional Notes_
-- The script installs the latest versions of the tools and packages available at the time of execution by using official repositories or package managers.
-- Ensure logging mechanisms are implemented in the script to capture installation steps and errors.
-- If an installation step fails, users may need to troubleshoot or manually complete the installation process.
-
-Always check the official documentation for each tool for the most up-to-date information.
