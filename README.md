@@ -1,48 +1,74 @@
-# Ubuntu 22.0+ Server Setup Provisioning Script - Automated Package Installer
+# Ubuntu 24.0+ Server Setup Provisioning Script - Automated Package Installer
 
-## _Overview_
+## 👀 *Overview*
+
 This script automates the installation of various tools and packages for a fresh Ubuntu production server using Bash.
 
-The script is organized into sections, each responsible for installing and configuring a specific application. It is intended to be executed using the Bash interpreter. The shebang at the beginning (`#!/usr/bin/env bash`) ensures that the script is interpreted using Bash.
+It simplifies the process of setting up MongoDB, Node.js, and other commonly used tools to ensure your server is ready for development or production.
 
-## _Installed Tools & Packages_
+The script is organized into sections, each responsible for installing and configuring a specific application. It is intended to be executed using the Bash interpreter. The shebang at the beginning (#!/usr/bin/env bash) ensures that the script is interpreted using Bash.
 
-The following tools and packages will be installed by the provided script:
+- Ensures services like MongoDB and Nginx are enabled to start at boot.
+- Provides verification steps for successful installation.
 
-```bash
-   1. GitHub CLI (gh): Command-line tool for interacting with GitHub repositories.
-   2. NVM: Manages Node.js versions; Node.js: JavaScript runtime; npm: Package manager for Node.js.
-   3. MongoDB Shell (mongosh): Interactive shell for MongoDB.
-   4. MongoDB Server: NoSQL database.
-   5. PM2: Process manager for Node.js applications.
-   6. Nginx: Web server for HTTP content.
-   7. UFW: Firewall management tool.
-```
+## 🌟 *Features*
 
-## _Supported Ubuntu Version_
+- Installs and configures:
+  - 🛠️ `build-essential`: For compiling software from source.
+  - 🌀 `git`: Version control system.
+  - 🌀 `github-cli`: Command-line tool for interacting with GitHub repositories.
+  - 🌐 `curl` and `wget`: Command-line tools for file transfers.
+  - ✏️ `vim`: Text editor.
+  - 📊 `htop`: Process viewer.
+  - 🌍 `net-tools`: Networking utilities.
+  - 🔥 `ufw`: Firewall management.
+  - 🛡️ `fail2ban`: Security tool to prevent brute-force attacks.
+  - 🌐 `nginx`: Web server.
+  - ⚙️ `node`: Using NVM (Node Version Manager).
+  - ⚙️ `pm2`: Process manager for Node.js applications.
+  - ⚙️ `MongoDB`: Server and Mongo Shell.
+
+## 🚀 *Prerequisites*
+
+- Root or `sudo` privileges.
+
 This script works flawlessly on the following version of Ubuntu:
 
 ```bash
 Distributor ID: Ubuntu
-Description:    Ubuntu 22.04.3 LTS
+Description:    Ubuntu 24.04 LTS
 Architecture:   x64 and ARM64
-Release:        22.04
-Codename:       jammy
-```
-Other versions of Ubuntu 22.04.x LTS may also work but have not been explicitly tested.
-
-## _Additional Notes_
-
-```bash
-- Administrative privileges (`sudo` access) required.
-- Ensure that the script is tested in a staging environment before deploying it to production.
-- The script installs the latest versions of the tools and packages available at the time of execution by using official repositories or package managers.
-- Ensure logging mechanisms are implemented in the script to capture installation steps and errors.
-- If an installation step fails, users may need to troubleshoot or manually complete the installation process.
-- Always check the official documentation for each tool for the most up-to-date information.
+Release:        24.04
+Codename:       lunar
 ```
 
-## _Setting Up Environment Variables_
+## 📋 *How to Use*
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/monolithgoon/install-ubuntu-server-packages.git
+   cd install-ubuntu-server-packages
+   ```
+
+2. **Run the Script**:
+   ```bash
+   chmod +x install_packages.sh
+   ./install_packages.sh
+   ```
+
+3. **Follow On-Screen Prompts**:
+   - During the Node.js installation, you can choose between installing a specific version or the latest LTS version.
+
+## 📝 *Logging*
+
+- All output is logged to `script.log` in the working directory.
+
+## 🚨 *Error Handling*
+
+- The script includes error handling to terminate if any command fails.
+- Errors are logged with the line number for debugging.
+
+## 🛠️ *Setting Up Environment Variables*
 
 Before installing any packages, the script configures environment variables for production by adding the following line to the `.profile` file:
 
@@ -66,6 +92,10 @@ set -o allexport; source /home/ubuntu/production.env; set +o allexport
    - `set +o allexport` disables automatic exporting of variables. Any variables defined or modified after this point will not be added to the environment automatically.
 
 This setup ensures that every time a user logs in or starts a new shell session:
-1. `set -o allexport`: The environment variables defined in the `production.env` file are automatically exported ).
+1. `set -o allexport`: The environment variables defined in the `production.env` file are automatically exported.
 2. These variables are immediately available for use by the shell or any child processes.
 3. `set +o allexport`: Automatic exporting is disabled after loading the environment variables, preventing unintentional exports of future variables.
+
+## 📄 *License*
+
+This script is licensed under the MIT License. Feel free to modify and distribute it as needed.
