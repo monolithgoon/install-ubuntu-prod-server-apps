@@ -291,6 +291,57 @@ check_gh_cli_login() {
     fi
 }
 
+# Function to check if mongosh is installed and prompt user to create a MongoDB Atlas shell connect script
+create_mongodb_atlas_connect_script() {
+    local script_path="/home/$USER/bin/mongodb-atlas-shell-connect.sh"
+
+    # Check if mongosh is installed
+    if ! command -v mongosh &> /dev/null; then
+        echo "mongosh is not installed."
+        read -p "Would you like to install it now? (y/n): " install_mongosh
+        if [[ "$install_mongosh" =~ ^[Yy]$ ]]; then
+            echo "Installing mongosh..."
+            # Install mongosh (Ubuntu example)
+            sudo apt-get update
+            sudo apt-get install -y mongosh
+        else
+            echo "Skipping mongosh installation. The script will not be created without mongosh."
+            return 1
+        fi
+    else
+        echo "mongosh is already installed."
+    fi
+
+    # Check if the script file already exists
+    if [ -f "$script_path" ]; then
+        echo "The script '$script_path' already exists."
+        return 0
+    fi
+
+    # Prompt the user to create the script
+    read -p "The file '$script_path' does not exist. Would you like to create it now? (y/n): " create_script
+
+    if [[ "$create_script" =~ ^[Yy]$ ]]; then
+        echo "Creating the MongoDB Atlas shell connect script at '$script_path'..."
+
+        # Create the script file
+        touch "$script_path"
+
+        # Set the script file as executable
+        chmod +x "$script_path"
+
+        # Open the script in nano to allow the user to enter the connection string
+        echo "Opening the script in nano editor to enter your MongoDB Atlas connection string..."
+        nano "$script_path"
+
+        # Inform the user that the script is ready
+        echo "Your MongoDB Atlas shell connect script is ready at '$script_path'. You can now enter your connection string."
+
+    else
+        echo "Skipping the creation of the MongoDB Atlas shell connect script."
+    fi
+}
+
 # Reboot server function
 reboot_server() {
     read -p "Do you want to reboot the server now? (Y/N): " answer
@@ -312,6 +363,8 @@ install_mongodb
 setup_environment
 install_gh_cli
 check_gh_cli_login
+create_mongodb_atlas_connect_script
+
 
 box_text "Packages Installed Successfully"
 
