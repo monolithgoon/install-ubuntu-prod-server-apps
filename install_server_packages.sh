@@ -313,7 +313,7 @@ setup_environment
 install_gh_cli
 check_gh_cli_login
 
-box_text "Installation Script Completed Successfully"
+box_text "Packages Installed Successfully"
 
 # Execute commands with labels
 label_and_execute "npm Version" "npm -v"
