@@ -293,7 +293,8 @@ check_gh_cli_login() {
 
 # Function to check if mongosh is installed and prompt user to create a MongoDB Atlas shell connect script
 create_mongodb_atlas_connect_script() {
-    local script_path="/home/$USER/bin/mongodb-atlas-shell-connect.sh"
+    local bin_dir="/home/$USER/bin"
+    local script_path="$bin_dir/mongodb-atlas-shell-connect.sh"
 
     # Check if mongosh is installed
     if ! command -v mongosh &> /dev/null; then
@@ -310,6 +311,12 @@ create_mongodb_atlas_connect_script() {
         fi
     else
         echo "mongosh is already installed."
+    fi
+
+    # Check if the "bin" directory exists; if not, create it
+    if [ ! -d "$bin_dir" ]; then
+        echo "The '$bin_dir' directory does not exist. Creating it now..."
+        mkdir -p "$bin_dir"
     fi
 
     # Check if the script file already exists
